@@ -1,0 +1,23 @@
+<article class="card" [class.card--inactive]="!course.active" aria-live="polite">
+  <header class="card__header">
+    <h3 class="card__title">{{ course.name }}</h3>
+    <span class="badge" [class.badge--inactive]="!course.active">
+      {{ course.active ? 'Activo' : 'Inactivo' }}
+    </span>
+  </header>
+
+  <dl class="card__meta">
+    <div><dt>Categoría</dt><dd>{{ course.category }}</dd></div>
+    <div><dt>Nivel</dt><dd>{{ course.level }}</dd></div>
+  </dl>
+
+  <footer class="card__actions">
+    <button type="button" (click)="edit.emit(course)">Editar</button>
+    <button type="button" (click)="toggleActive.emit(course)">
+      {{ course.active ? 'Desactivar' : 'Activar' }}
+    </button>
+    <button type="button" class="danger" (click)="delete.emit(course)">
+      Eliminar
+    </button>
+  </footer>
+</article>

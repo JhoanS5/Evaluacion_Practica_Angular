@@ -1,59 +1,103 @@
+
 # CourseTracker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.2.
+Mini aplicación en **Angular 20.2.0 (Standalone Components)** para gestionar cursos y lecciones.
 
-## Development server
+---
 
-To start a local development server, run:
+## Requisitos
 
-```bash
-ng serve
-```
+- [Node.js](https://nodejs.org/) v18+ (Recomendado LTS)
+- [Angular CLI](https://angular.dev/tools/cli) v17+
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Instalación 📦
+Clona el repositorio e instala las dependencias:
 
 ```bash
-ng generate component component-name
+git clone https://github.com/JhoanS5/course-tracker.git
+cd course-tracker
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+## Desarrollo ▶️
+Inicia el servidor de desarrollo:
 ```bash
-ng generate --help
+npm start
 ```
+Por defecto la app estará disponible en: http://localhost:4200
 
-## Building
-
-To build the project run:
-
+## Build 🏗️
+Genera los archivos para producción:
 ```bash
-ng build
+npm run build
+```
+Los archivos compilados quedarán en la carpeta dist/.
+
+## Funcionalidades ✅
+
+* 📋 Listado de cursos con nombre, categoría, nivel y estado (Activo/Inactivo).
+* ➕ Crear curso con formulario template-driven (ngModel).
+* ✏️ Editar curso con validaciones (required, minlength).
+* 🗑️ Eliminar curso.
+* 🔄 Activar/Inactivar curso con un botón toggle.
+* 🎯 Filtros por categoría (texto) y nivel (select).
+* 🔢 Contador: X cursos activos / Y totales.
+* ❌ Limpiar filtros con un chip/badge.
+* 🌟 Directiva personalizada appRequiredAsterisk: añade asterisco rojo en labels requeridos.
+* 💾 Persistencia en LocalStorage mediante StorageService.
+* ♿ Accesibilidad básica: labels asociados, aria-hidden en asterisco.
+
+## Estructura del Proyecto 🗂️
+```css
+src/
+  app/
+    components/
+      course-item/
+        course-item.component.ts
+        course-item.component.html
+        course-item.component.css
+    directives/
+      required-asterisk.directive.ts
+    models/
+      course.model.ts
+    pages/
+      courses/
+        courses-page.component.ts
+        courses-page.component.html
+        courses-page.component.css
+    services/
+      storage.service.ts
+    app.config.ts
+    app.routes.ts
+    app.component.ts
+    main.ts
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Modelo de datos 📑
+```ts
+export type Level = 'Beginner' | 'Intermediate' | 'Advanced';
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+export interface Course {
+  id: string;
+  name: string;
+  category: string;
+  level: Level;
+  active: boolean;
+}
 ```
 
-## Running end-to-end tests
+## Buenas prácticas aplicadas
+* ✅ Standalone components (sin módulos innecesarios).
+* ✅ Control flow Angular v17 (@if, @for).
+* ✅ @Input / @Output para comunicación padre-hijo.
+* ✅ Directiva personalizada con Renderer2 y accesibilidad (aria-hidden).
+* ✅ Tipado estricto con interface Course y type Level.
+* ✅ Persistencia localStorage con StorageService.
+* ✅ Carpetas por feature para organización.
+* ✅ Validaciones de formularios template-driven (ngModel).
+* ✅ Lint y convención de nombres (camelCase / PascalCase).
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Autor 🏅
+Desarrollado como ejercicio practico de Angular por [Jhoan Sebastian Diaz Balta]

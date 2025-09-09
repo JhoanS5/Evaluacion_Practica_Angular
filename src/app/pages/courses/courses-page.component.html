@@ -1,0 +1,107 @@
+<section style="max-width:980px;margin:24px auto;padding:0 12px">
+  <h1>CourseTracker</h1>
+
+  <!-- Filtros -->
+  <div class="filters">
+    <input
+      type="text"
+      placeholder="Filtrar por categoría..."
+      [(ngModel)]="filterCategory"
+      name="filterCategory"
+    />
+
+    <select [(ngModel)]="filterLevel" name="filterLevel">
+      <option value="">Todos los niveles</option>
+      @for (lvl of levels; track lvl) {
+        <option [value]="lvl">{{ lvl }}</option>
+      }
+    </select>
+
+    @if (filterCategory || filterLevel) {
+      <span class="chip" (click)="clearFilters()">
+        Limpiar filtros ✕
+      </span>
+    }
+  </div>
+
+  <!-- Contador -->
+  <p class="counter">
+    {{ activeCount }} cursos activos / {{ filteredCourses.length }} totales
+  </p>
+
+  <!-- Formulario -->
+  <form #courseForm="ngForm" (ngSubmit)="onSubmit(courseForm)" style="margin-bottom:24px">
+    <div>
+      <label for="name" appRequiredAsterisk>Nombre</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="formModel.name"
+        required
+        minlength="3"
+        #nameCtrl="ngModel"
+      />
+      @if (nameCtrl.invalid && nameCtrl.touched) {
+        <small style="color:red">Nombre es requerido (mínimo 3 caracteres).</small>
+      }
+    </div>
+
+    <div>
+      <label for="category" appRequiredAsterisk>Categoría</label>
+      <input
+        type="text"
+        id="category"
+        name="category"
+        [(ngModel)]="formModel.category"
+        required
+        #catCtrl="ngModel"
+      />
+      @if (catCtrl.invalid && catCtrl.touched) {
+        <small style="color:red">Categoría es requerida.</small>
+      }
+    </div>
+
+    <div>
+      <label for="level" appRequiredAsterisk>Nivel</label>
+      <select
+        id="level"
+        name="level"
+        [(ngModel)]="formModel.level"
+        required
+        #levelCtrl="ngModel"
+      >
+        <option value="">Seleccione un nivel</option>
+        @for (lvl of levels; track lvl) {
+          <option [value]="lvl">{{ lvl }}</option>
+        }
+      </select>
+      @if (levelCtrl.invalid && levelCtrl.touched) {
+        <small style="color:red">Nivel es requerido.</small>
+      }
+    </div>
+
+    <button type="submit" [disabled]="courseForm.invalid">
+      {{ editingCourse ? 'Actualizar' : 'Guardar' }}
+    </button>
+    @if (editingCourse) {
+      <button type="button" (click)="onCancel(courseForm)">Cancelar</button>
+    }
+  </form>
+
+  <!-- Listado -->
+  @if (filteredCourses.length === 0) {
+    <p>No hay cursos disponibles.</p>
+  } @else {
+    <div style="display:grid;gap:12px">
+      @for (course of filteredCourses; track course.id) {
+        <course-item
+          [course]="course"
+          (edit)="onEdit($event)"
+          (toggleActive)="onToggleActive($event)"
+          (delete)="onDelete($event)">
+        </course-item>
+      }
+    </div>
+  }
+</section>
