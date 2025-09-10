@@ -11,7 +11,7 @@ import { Course } from '../../models/course.model'
     styleUrl: './course-item.component.css',
 })
 export class CourseItemComponent {
-    @Input({ required: true }) course!: Course;
+    @Input() course!: Course;
 
     @Output() edit = new EventEmitter<Course>();
     @Output() toggleActive = new EventEmitter<Course>();
