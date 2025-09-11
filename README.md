@@ -87,6 +87,22 @@ export interface Course {
   active: boolean;
 }
 ```
+### Demostración en Imagenes
+
+#### Crear curso válido:
+![Formulario para crear cursos](./public/imgs/Curso_Valido.png)
+
+#### Editar curso:
+![Editar curso existente](./public/imgs/Editar_Curso.png)
+
+#### Botones de activar/desactivar/eliminar:
+![Botones para activar, desactivar y eliminar](./public/imgs/Activar_Desactivar_Eliminar.png)
+
+#### Uso de filtros y contador.
+![Uso de filtros y contador](./public/imgs/Uso_Filtros_Contador.png)
+
+#### Uso del @empty al no haber resultados.
+![Uso del @empty](./public/imgs/Uso_Empty.png)
 
 ## Buenas prácticas aplicadas
 * ✅ Standalone components (sin módulos innecesarios).
